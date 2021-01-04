@@ -12,10 +12,12 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    
+                    @if (Auth::user()->user_type === "Organisation")
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-jet-nav-link>
-                    @if (Auth::user()->user_type === "Organisation")
+
                     <x-jet-nav-link href="{{ route('show_peek_product') }}" :active="request()->routeIs('show_peek_product')">
                         {{ __('Buy Product') }}
                     </x-jet-nav-link>
@@ -23,6 +25,16 @@
                     <!--checkout-->
                     <x-jet-nav-link href="{{ route('org.checking_out') }}" :active="request()->routeIs('org.checking_out')">
                         {{ __('Checkout Product') }}
+                    </x-jet-nav-link>
+                    @endif
+                    
+                    @if (Auth::user()->user_type === "Farmer")
+                    <x-jet-nav-link href="{{ route('farmersdashboard') }}" :active="request()->routeIs('farmersdashboard')">
+                        {{ __('Dashboard') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('newfarm') }}" :active="request()->routeIs('newfarm')">
+                        {{ __('Add PeekVeg Farm') }}
                     </x-jet-nav-link>
                     @endif
                 </div>
