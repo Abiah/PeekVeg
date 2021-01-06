@@ -26,7 +26,8 @@ class Product extends Model
 
     public static function search($search){
 
-        return empty($search) ? static::query() : static::query()->where('product_name','like','%'.$search.'%');
+        return empty($search) ? static::query() : static::query()->where('product_name','like','%'.$search.'%')                                                                                     
+                                                                ->orWhere('location','like','%'.$search.'%');
     }
     
     public function categories(){

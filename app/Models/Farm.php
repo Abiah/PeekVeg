@@ -21,7 +21,7 @@ class Farm extends Model
 
     public function users(){
 
-        return $this->belongsTo(User::class,'famer_code');
+        return $this->belongsTo(User::class);
     }
 
     public function products(){

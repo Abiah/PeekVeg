@@ -49,7 +49,7 @@
                     </div>
                 </div>
                 @if (Route::has('login'))
-                    <div class="hidden fixed px-6 py-4 sm:block">
+                    <div class=" fixed px-6 py-4 sm:block">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="text-sm text-gray-700 underline">Dashboard</a>
                         @else

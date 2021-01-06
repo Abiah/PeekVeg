@@ -17,7 +17,7 @@ class CreateFarmsTable extends Migration
             $table->id();
             $table->string('farm_code')->unique()->nullable();
             $table->string('farm_type');
-            $table->string('farm_location');
+            $table->string('farm_location')->unique()->nullable();
             $table->string('farm_produce');
             $table->string('max_produce');
             $table->string('min_produce');

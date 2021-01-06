@@ -1,6 +1,7 @@
 <?php
 
 
+use App\Http\Controllers\FarmerTask;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovementController;
 
@@ -33,9 +34,13 @@ Route::get('/peekfarm',[MovementController::class,'newFarm'])->middleware(['auth
 
 Route::get('/peekproduct',[MovementController::class,'newproduct'])->middleware(['auth','farmerrole'])->name('newproduct');
 
-Route::post('/newfarm',[MovementController::class,'add_farm'])->middleware(['auth','farmerrole'])->name('post_add_farm');
-Route::post('/peekproduct',[MovementController::class,'add_product'])->middleware(['auth','farmerrole'])->name('add_product');
+Route::post('/newfarm',[FarmerTask::class,'add_farm'])->middleware(['auth','farmerrole'])->name('post_add_farm');
+Route::post('/peekproduct',[FarmerTask::class,'add_product'])->middleware(['auth','farmerrole'])->name('add_product');
 
 Route::middleware(['farmerrole','auth'])->get('/users/dashboard', function () {
     return view('farmers.dashboard');
 })->name('farmersdashboard');
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});

@@ -1,11 +1,11 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('PeekVeg Farm') }}
         </h2>
     </x-slot>
 
-    <div class=" grid shadow-2xl bg-white rounded-lg h-18 font-semibold">
+    <div class="shadow-2xl bg-white rounded-lg h-18 font-semibold">
         <!-- component -->
     @if ($errors->any())
         <div class="flex justify-center alert text-center">
@@ -37,7 +37,7 @@
         @csrf
         @method("post")
         <section class="py-20 bg-gray-100  bg-opacity-50 ">
-            <div class="mx-auto container max-w-2xl md:w-3/4 shadow-md">
+            <div class="mx-auto container sm:w-3/4 max-w-2xl lg:w-1/2 md:w-3/4 shadow-md">
                 <div class="bg-gray-100 p-4 border-t-2 bg-opacity-5 border-indigo-400 rounded-t">
                     <div class="max-w-sm mx-auto md:w-full md:mx-0">
                         <div class="inline-flex items-between space-x-96 ml-10">

@@ -17,10 +17,11 @@
     </div>
 </div>
 
-<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 mt-2">
-    <div class="p-6">
+<div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-2">
+    <div class="p-0">
         @forelse ($all_product as $product)
-        <a href="{{ route('show_peek', $product->id) }}"   wire:loading.class="animate-pulse">
+        {{-- {{ route('show_peek', $product->id) }} --}}
+        <a href="#"   wire:loading.class="animate-pulse">
             <div class="ml-2">
                 <div class="mt-2 text-sm text-gray-500">
                     <div class="shadow-sm relative top-0 px-2 py-2 mt-3">
@@ -40,14 +41,14 @@
                                 </div>
                             </div>
                                 <hr>
-                            <h4 class="mt-1 text-xl font-semibold uppercase leading-tight truncate">{{$product->product_name}}
+                            <h4 class="mt-1 text-xl font-semibold uppercase leading-tight ">{{$product->product_name}}
                             </h4>
     
                             <div class="mt-1">
                                 {{$product->price}}
                                 <span class="text-gray-600 text-sm"> Gh/&#x20b5</span>
                             </div>
-                            <div class="mt-4">
+                            <div class="flex flex-shrink space-x-3 mt-4">
                                 <label class="text-gray-600" for="">last purchase:</label>
                                 <span class="text-gray-600 text-md font-normal">@if ($product->last_purchase =='')
                                     {{'Recently uploaded'}}
@@ -55,6 +56,7 @@
                                  {{$product->last_purchase}}
                                 @endif</span>
                                 <div class="text-gray-600 mt-1 text-md font-semibold">Price: {{$product->price}} </div>
+                                <div class="text-gray-600 mt-1 text-md font-semibold">Stock: {{$product->stock}} </div>
                             </div>
                             <hr>
                             <div class="mt-4">

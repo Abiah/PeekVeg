@@ -46,7 +46,12 @@
         
         <main class="my-8">
             <div class="container mx-auto px-6">
-                <h3 class="text-gray-700 text-2xl font-medium">Checkout</h3>
+                <h3 class="text-gray-700 text-2xl font-medium ">Checkout</h3>
+                <div>
+                    @if (session()->has('orders'))
+                        <label for="" class="bg-green-400 p-3 rounded-sm ">{{session("orders")}}</label>
+                    @endif
+                </div>
                 <div class="flex flex-col lg:flex-row mt-8">
                     <div class="w-full lg:w-1/2 order-2">
                         <div class="flex items-center">
@@ -54,9 +59,9 @@
                             <button class="flex text-sm text-gray-700 ml-8 focus:outline-none"><span class="flex items-center justify-center border-2 border-blue-500 rounded-full h-5 w-5 mr-2">1</span> Detials</button>
                             <button class="flex text-sm text-gray-500 ml-8 focus:outline-none" disabled><span class="flex items-center justify-center border-2 border-gray-500 rounded-full h-5 w-5 mr-2">2</span> Payments</button>
                         </div>
-                        <form class="mt-8 lg:w-3/4" action="{{'payment'}}" method="post" >
+                        <form wire:submit.prevent="orderProduct" class="mt-8 lg:w-3/4" >
                             @csrf
-                            @method('post')
+                            
                             <div>
                                 <h4 class="text-sm text-gray-500 font-medium">Delivery method</h4>
                                 <div class="mt-6">
@@ -107,7 +112,7 @@
                                     <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
                                     <span class="mx-2">Back step</span> 
                                 </a>
-                                <button class="flex items-center px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
+                                <button  class="flex items-center px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                     <span>Payment</span>
                                     <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                                 </button>
@@ -123,9 +128,9 @@
                                 </div>
                                @forelse (\Cart::content() as $item)
         
-                                <div class="flex justify-between mt-3 mb-3">
-                                    <div class="flex">
-                                        <p id="profileImage" class="mt-2 text-center text-white bg-green-500 h-20 w-20 object-cover" >PeekVeg</p>
+                                <div class="flex  flex-shrink-0 justify-between mt-3 mb-3">
+                                    <div class="flex ">
+                                        <p id="profileImage" class="hidden mt-2 text-center text-white bg-green-500 h-20 w-20 object-cover" >PeekVeg</p>
                                         {{-- <img class="h-20 w-20 object-cover rounded" src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80" alt=""> --}}
                                         <div class="mx-3">
                                             <h3 class="text-sm text-gray-600">{{$item->name}}</h3>
@@ -137,12 +142,14 @@
                                                 {{-- <input type="number" min="1" class="w-1/4 rounded-md border-2 mr-1 border-blue-500" value="{{$item->qty}}" /> --}}
                                                 {{-- <button class="text-gray-500 focus:outline-none focus:text-gray-600">
                                                     <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                                </button> --}}
-                                                <form id="updating{{$item->rowId}}" action="{{ route('update',$item->rowId) }}" method="post" class="" >
-                                                    @csrf @method('POST')  
-                                                    Weight :&nbsp; <input name="quantity" placeholder="{{$item->qty}}" type="text" min="1" class="w-1/5 rounded-md border-2 mr-1 border-blue-500" value="{{$item->qty}}" />
+                                                </button> { route('update',$item->rowId) }} --}}
+
+                                                <form id="updating{{$item->rowId}}" wire:submit.prevent = "update('{{$item->rowId}}')" class="" >
+                                                    @csrf 
+                                                    Weight :&nbsp; 
+                                                    <input wire:model.debounce.10000ms="quantity" placeholder="{{$item->qty}}" type="number" min="1" class="w-1/5 rounded-md border-2 mr-1 border-blue-500 text-gray-900 p-2 pl-2" value="{{$item->qty}}" />
                                                     / kilo(s) &nbsp;
-                                                    <button onclick="event.preventDefault(); document.getElementById('updating{{$item->rowId}}').submit();" class="text-gray-500 focus:outline-none bg-yellow-400 p-2 rounded focus:text-gray-600">
+                                                    <button  class="text-gray-500 focus:outline-none bg-yellow-400 p-2  sm:p-1 rounded focus:text-gray-900">
                                                         update
                                                     </button>
                                                    </form>

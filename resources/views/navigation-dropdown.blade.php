@@ -11,7 +11,7 @@
                 </div>
 
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <div class=" space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     
                     @if (Auth::user()->user_type === "Organisation")
                     <x-jet-nav-link href="{{ route('dashboard') }}" :active="request()->routeIs('dashboard')">
@@ -35,6 +35,10 @@
 
                     <x-jet-nav-link href="{{ route('newfarm') }}" :active="request()->routeIs('newfarm')">
                         {{ __('Add PeekVeg Farm') }}
+                    </x-jet-nav-link>
+
+                    <x-jet-nav-link href="{{ route('newproduct') }}" :active="request()->routeIs('newproduct')">
+                        {{ __('Add PeekVeg Product') }}
                     </x-jet-nav-link>
                     @endif
                 </div>

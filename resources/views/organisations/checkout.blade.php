@@ -5,8 +5,6 @@
         </h2>
     </x-slot>
 
-
-
     @livewire('check-out-product')
 
 <style>
