@@ -39,4 +39,9 @@ class Product extends Model
 
         return $this->hasOne(Farm::class,'farm_code','farms_code');
     }
+
+    public function orders()
+    {
+        return $this->belongsToMany(Order::class);
+    }
 }

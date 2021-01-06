@@ -15,14 +15,8 @@ class CreateOrdersTable extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('purchase_id')->unique();
-            $table->string('organisation_code');
-            $table->date('purchase_date');
-            $table->string('product_id');
-            $table->string('quanitity');
-            $table->string('farm_code');
-            $table->string('farmer_code');
-            $table->string('status')->nullable();
+            $table->string('purchaseIds')->unique()->nullable();
+            $table->foreign("purchaseIds")->references("purchase_id")->on("order_details")->onUpdate("cascade")->onDelete("set null");
             $table->timestamps();
         });
     }

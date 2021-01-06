@@ -66,4 +66,9 @@ class User extends \TCG\Voyager\Models\User
         
         return $this->hasMany(Farm::class);
     }
+
+    public function orders(){
+        
+        return $this->hasMany(Order::class);
+    }
 }

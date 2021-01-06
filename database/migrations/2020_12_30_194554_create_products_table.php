@@ -16,14 +16,13 @@ class CreateProductsTable extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('product_name');
-            $table->string('product_id')->index()->nullable();
+            $table->string('product_id')->unique()->nullable();
             $table->integer('price');
             $table->string('category')->nullable();
             $table->foreign("category")->references("category_id")->on("categories")->onUpdate("cascade")->onDelete("set null");
             $table->string('farms_code');
             $table->foreign("farms_code")->references("farm_code")->on("farms")->onUpdate("cascade")->onDelete("set null");
             $table->string('location')->nullable();
-            $table->foreign("location")->references("farm_location")->on("farms")->onUpdate("cascade")->onDelete("set null");
             $table->string('farmer_code');
             $table->integer('stock');
             $table->integer('total_purchase')->nullable();

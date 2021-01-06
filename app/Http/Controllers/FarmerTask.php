@@ -39,9 +39,16 @@ class FarmerTask extends Controller
 
              }else{
 
-                $farms->save();
+               if (is_numeric($request->farm_produce)) {
+                return redirect()->route('newfarm')->with('error',"Farm produce can not be a number ");
+               }
 
+               else{$farms->save();
                 return redirect()->route('newfarm')->with('farmcode',$farms->farm_code);
+            }
+
+
+               
              }
         }
     }

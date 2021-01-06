@@ -47,11 +47,7 @@
         <main class="my-8">
             <div class="container mx-auto px-6">
                 <h3 class="text-gray-700 text-2xl font-medium ">Checkout</h3>
-                <div>
-                    @if (session()->has('orders'))
-                        <label for="" class="bg-green-400 p-3 rounded-sm ">{{session("orders")}}</label>
-                    @endif
-                </div>
+                
                 <div class="flex flex-col lg:flex-row mt-8">
                     <div class="w-full lg:w-1/2 order-2">
                         <div class="flex items-center">
@@ -67,35 +63,30 @@
                                 <div class="mt-6">
                                     <p class="flex items-center justify-between w-full bg-white rounded-md border-2 border-blue-500 p-4 focus:outline-none">
                                         <label class="flex items-center">
-                                            <input type="checkbox" class="form-radio h-5 w-5 text-blue-600" ><span class="ml-2 text-sm text-gray-700">MS Delivery (Pay Before Delivery)</span>
+                                            <input  wire:model='delivery_method' value= "Pay Before delivery"  name="dmeth" type="radio" class="form-radio h-5 w-5 text-blue-600" ><span class="ml-2 text-sm text-gray-700">MS Delivery (Pay Before Delivery)</span>
                                         </label>
     
                                         <span class="text-gray-600 text-sm">Gh &#x20b5; 0</span>
                                     </p>
-                                    <p class="mt-6 flex items-center justify-between w-full bg-white rounded-md border p-4 focus:outline-none">
-                                        <label class="flex items-center">
-                                            <input type="checkbox" class="form-radio h-5 w-5 text-blue-600"><span class="ml-2 text-sm text-gray-700">DC Delivery (Direct Cash Delivery)</span>
-                                        </label>
-    
-                                        <span class="text-gray-600 text-sm">Gh &#x20b5; 10</span>
-                                    </p>
+                                   
                                 </div>
                             </div>
                             <div class="mt-8">
                                 <h4 class="text-sm text-gray-500 font-medium">Delivery address</h4>
                                 <div class="mt-6 flex">
                                     <label class="block w-3/12">
-                                        <select class="form-select text-gray-700 mt-1 block w-full">
-                                           @forelse ($cities as $item)
-                                                <option value="{{$item->cities_code}}">{{$item->cities_short}} - {{$item->cities}}</option>
+                                        <select wire:model='delivery_cities'  class="form-select text-gray-700 mt-1 block w-full">
+                                            <option disabled selected>Select delivery City code</option>
+                                           @forelse ($city as $items)
+                                                <option value="{{$items->cities_code}}">{{$items->cities_short}} - {{$items->cities}}</option>
                                            @empty
-                                                 <option>Shop unavailable</option>
+                                                 <option disabled selected>Shop unavailable</option>
                                            @endforelse
                                            
                                         </select>
                                     </label>
                                     <label class="block flex-1 ml-3">
-                                        <input type="text" class="form-input mt-1 block w-full text-gray-700" placeholder="Address">
+                                        <input wire:model='delivery_address' type="text" class="form-input mt-1 block w-full text-gray-700" placeholder="Address">
                                     </label>
                                 </div>
                             </div>
@@ -103,7 +94,7 @@
                                 <h4 class="text-sm text-gray-500 font-medium">Date (when needed)</h4>
                                 <div class="mt-6 flex">
                                     <label class="block flex-1">
-                                        <input type="date" class="form-input mt-1 block w-full text-gray-700" placeholder="Date">
+                                        <input wire:model='when_date' type="date" class="form-input mt-1 block w-full text-gray-700" placeholder="Date">
                                     </label>
                                 </div>
                             </div>
@@ -112,6 +103,11 @@
                                     <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M7 16l-4-4m0 0l4-4m-4 4h18"></path></svg>
                                     <span class="mx-2">Back step</span> 
                                 </a>
+                                <div>
+                                    @if (session()->has('orders'))
+                                        <label for="" class="bg-green-400 p-3 rounded-sm ">{{session("orders")}}</label>
+                                    @endif
+                                </div>
                                 <button  class="flex items-center px-3 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
                                     <span>Payment</span>
                                     <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>

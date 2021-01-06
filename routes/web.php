@@ -1,6 +1,7 @@
 <?php
 
 
+use TCG\Voyager\Facades\Voyager;
 use App\Http\Controllers\FarmerTask;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MovementController;
