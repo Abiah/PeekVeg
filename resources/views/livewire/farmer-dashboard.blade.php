@@ -1,4 +1,4 @@
-<div class="p-6 sm:px-20 bg-white border-b border-gray-200">
+<div class="p-6 sm:px-10 bg-white border-b border-gray-200">
     <div class="flex ">
         <x-jet-application-logo class="block h-12 w-auto" />
         <div class="ml-4 mt-2 font-semibold text-3xl">PeekVeg</div>
@@ -9,19 +9,75 @@
     </div>
 
     <div class="mt-6 text-gray-500">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore
-        magna aliqua.
-        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis
-        aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-        occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div id="dash-content" class="bg-gray-200 py-3 w-full flex flex-grow-0 ">
+
+            <div class="w-1/2 ">
+                <div class="border-2 border-gray-400 border-dashed hover:border-transparent hover:bg-white hover:shadow-xl rounded p-6 m-2 md:mx-10 md:my-6">
+                    <div class="flex flex-col items-center">
+                        <div class="flex-shrink pr-4">
+                            <div class="rounded-full p-3 bg-gray-300"><i class="fa fa-wallet fa-fw fa-inverse text-indigo-500"></i></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-3xl">$3249 <span class="text-green-500"><i class="fas fa-caret-up"></i></span></h3>
+                            <h5 class="font-bold text-gray-500">Total Revenue</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 ">
+                <div class="border-2 border-gray-400 border-dashed hover:border-transparent hover:bg-white hover:shadow-xl rounded p-6 m-2 md:mx-10 md:my-6">
+                    <div class="flex flex-col items-center">
+                        <div class="flex-shrink pr-4">
+                            <div class="rounded-full p-3 bg-gray-300"><i class="fas fa-users fa-fw fa-inverse text-indigo-500"></i></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-3xl">249 <span class="text-orange-500"><i class="fas fa-exchange-alt"></i></span></h3>
+                            <h5 class="font-bold text-gray-500">Total Users</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 ">
+                <div class="border-2 border-gray-400 border-dashed hover:border-transparent hover:bg-white hover:shadow-xl rounded p-6 m-2 md:mx-10 md:my-6">
+                    <div class="flex flex-col items-center">
+                        <div class="flex-shrink pr-4">
+                            <div class="rounded-full p-3 bg-gray-300"><i class="fas fa-user-plus fa-fw fa-inverse text-indigo-500"></i></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-3xl">2 <span class="text-yellow-600"><i class="fas fa-caret-up"></i></span></h3>
+                            <h5 class="font-bold text-gray-500">New Users</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-1/2 ">
+                <div class="border-2 border-gray-400 border-dashed hover:border-transparent hover:bg-white hover:shadow-xl rounded p-6 m-2 md:mx-10 md:my-6">
+                    <div class="flex flex-col items-center">
+                        <div class="flex-shrink pr-4">
+                            <div class="rounded-full p-3 bg-gray-300"><i class="fas fa-server fa-fw fa-inverse text-indigo-500"></i></div>
+                        </div>
+                        <div class="flex-1">
+                            <h3 class="font-bold text-3xl">152 days</h3>
+                            <h5 class="font-bold text-gray-500">Server Uptime</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </div>
 
 <div class="bg-gray-200 bg-opacity-25 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 mt-2">
     <div class="p-0">
+
         @forelse ($all_product as $product)
         {{-- {{ route('show_peek', $product->id) }} --}}
-        <a href="#"   wire:loading.class="animate-pulse">
+        <a href="{{ route('farmer_check', ['id'=>$product->id]) }}"   wire:loading.class="animate-pulse">
             <div class="ml-2">
                 <div class="mt-2 text-sm text-gray-500">
                     <div class="shadow-sm relative top-0 px-2 py-2 mt-3">
@@ -108,6 +164,7 @@
                 </div>
             </div>
         </a>
+        
         </div>
 
         @endforelse

@@ -51,43 +51,47 @@ class CheckOutProduct extends Component
             try {
                 $orders = new OrderDetail();
 
-            $purid = rand();
+                $deduct=  Product::find($value->id);
+                $deduct->stock = $deduct->stock - $value->qty;
+                $deduct->save();
+            
+                $purid = rand();
+                $orders->purchase_id = $purid;
+                $orders->product_name= $value->model->product_name;
+                $orders->user_code = Auth::user()->organisation_code ;
+                $orders->purchase_date =now();
+                $orders->productIds= $value->model->product_id ;
+                $orders->quanitity = $value->qty;
+                $orders->farming_code  = $value->model->farms_code;
+                $orders->farmer_code = $value->model->farmer_code;
+                $orders->status = 'order accepted';
 
-            $orders->purchase_id = $purid;
-            $orders->user_code = Auth::user()->organisation_code ;
-            $orders->purchase_date =now();
-            $orders->productIds= $value->model->product_id ;
-            $orders->quanitity = $value->qty;
-            $orders->farming_code  = $value->model->farms_code;
-            $orders->farmer_code = $value->model->farmer_code;
-            $orders->status = 'order accepted';
+                if ($this->delivery_method = " ") {
+                    $orders->delivery_method = "Direct cash delivery";
+                }
+                else{
+                    $orders->delivery_method = $this->delivery_method;
+                }
 
-            if ($this->delivery_method = " ") {
-                $orders->delivery_method = "Direct cash delivery";
+                
+            if ($this->delivery_cities === '--' ||  is_null($this->delivery_cities)) {
+                    $orders->delivery_add_code = Auth::user()->location ;
             }
             else{
-                $orders->delivery_method = $this->delivery_method;
+                $orders->delivery_add_code = $this->delivery_cities;
             }
+                $orders->delivery_address = $this->delivery_address;
+                $orders->when_needed = $this->when_date;
 
-            
-           if ($this->delivery_cities === '--' ||  is_null($this->delivery_cities)) {
-                $orders->delivery_add_code = Auth::user()->location ;
-           }
-           else{
-            $orders->delivery_add_code = $this->delivery_cities;
-           }
-            $orders->delivery_address = $this->delivery_address;
-            $orders->when_needed = $this->when_date;
+        
 
-      
+                $orders->save();
 
-            $orders->save();
+                session()->flash('orders','Order made successfully');
 
-            session()->flash('orders','Order made successfully');
+                Cart::store(Auth::user()->organisation_code.'/'.now()->day());
 
-            Cart::store(Auth::user()->organisation_code.'/'.now()->day());
-
-            Cart::destroy();
+                Cart::destroy();
             } catch (\Exception $th) {
                 throw $th;
             }

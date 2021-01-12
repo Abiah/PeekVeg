@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Models\Farm;
 use App\Models\Category;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MovementController extends Controller
 {
+
+    public function showorder($id){
+
+        $orders = OrderDetail::where("purchase_id",$id)->first();
+
+        return view('organisations.orders',[
+            'id'=>$orders,
+        ]);
+
+    }
+
+
+
     public function index(Request $request){
 
         if (Auth::user()->user_type === "Farmer") {

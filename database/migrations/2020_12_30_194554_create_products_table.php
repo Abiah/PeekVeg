@@ -17,7 +17,7 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('product_name');
             $table->string('product_id')->unique()->nullable();
-            $table->integer('price');
+            $table->decimal('price',8,2);
             $table->string('category')->nullable();
             $table->foreign("category")->references("category_id")->on("categories")->onUpdate("cascade")->onDelete("set null");
             $table->string('farms_code');

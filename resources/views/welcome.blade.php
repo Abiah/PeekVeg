@@ -42,7 +42,7 @@
 
                             <div class="ml-12">
                                 <div class="mt-2 text-black-600 dark:text-black-400 text-sm">
-                                    Laracasts offers thousands of video tutorials on Laravel, PHP, and JavaScript development. Check them out, see for yourself, and massively level up your development skills in the process.
+                                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel exercitationem, nam distinctio quae quibusdam voluptatem, facilis officiis ipsa voluptatibus asperiores quidem totam quaerat. Temporibus dolore accusantium nobis esse. Praesentium, officiis.
                                 </div>
                             </div>
                         </div>

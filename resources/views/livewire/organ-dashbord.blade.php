@@ -24,7 +24,7 @@
         @forelse ($recent as $item)
         <div class="p-6">
             
-                <a href="#">
+                <a href="{{ route('orderdet',$item->purchase_id) }}">
 
                     <div class="ml-12">
                         <div class="mt-2 text-sm text-gray-500">
@@ -52,7 +52,7 @@
                           </div>
                         </div>
         
-                        <div class="mt-3 flex items-center text-sm font-semibold text-indigo-700">
+                        <div  class="cursor mt-3 flex items-center text-sm font-semibold text-indigo-700">
                             <div>check product</div>
         
                             <div class="ml-1 text-indigo-500">
